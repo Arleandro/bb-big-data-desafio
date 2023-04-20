@@ -18,7 +18,7 @@ $ ./run.sh
 ou
 $ docker-compose up
 
-Para parar Execução
+Parar Execução
 $ docker-compose down
 
 
@@ -129,6 +129,9 @@ Response payload (Estruta de dados equivalente)
     }
 }
 
+![image](https://user-images.githubusercontent.com/28513394/233253913-f7ffe9ec-70bc-47ba-9dac-8bc1c0dd7b39.png)
+
+
 
 Para criar o índice no elasticsearch, executar o seguinte comando:
 $ curl --location --request PUT 'http://localhost:9200/inpe-temperatura-capitais'
@@ -139,6 +142,8 @@ Response payload
     "shards_acknowledged": true,
     "index": "inpe-temperatura-capitais"
 }
+![image](https://user-images.githubusercontent.com/28513394/233253810-50efed17-0481-4b1f-98d4-1b443c06281e.png)
+
 
 
 Para apagar o índice no elasticsearch, executar o seguinte comando:
@@ -148,3 +153,5 @@ Response payload
 {
     "acknowledged": true
 }
+![image](https://user-images.githubusercontent.com/28513394/233253964-c001f281-b894-4c04-822e-9dd5bc27d9b5.png)
+
