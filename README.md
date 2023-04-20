@@ -1,14 +1,77 @@
-# bb-big-data-desafio
+# Desafio BB
+
+## Descrição
 Construir um ambiente de streaming de dados utilizando Apache Nifi, Apache Kafka, Docker e Grafana.
 
-Pré-requisitos básicos:
+A execução de todos esses componentes deve ser realizada com containers Docker.
+
+1 - Você deve construir um fluxo no Nifi que realize os seguintes passos:
+
+1.1 - Conectar e coletar os dados de uma fonte em formato streaming, exemplo:
+- Twitter;
+- Portais de notícias;
+- Youtube. 
+  
+1.2 - Publicar estes dados coletados como eventos no Kafka. 
+  
+2 - Você deve construir um dashboard no Grafana para monitorar esse ambiente. O que será monitorado ficará ao seu critério.
+Qualquer dúvida, estamos à disposição! 
+
+
+## Solução implementada
+
+### Descrição da solução
+
+Construído um ambiente de streaming de dados utilizando Docker, Docker-Compose, Apache Nifi, Apache Kafka, ElasticSearch, Alert Manager, Prometeus e Grafana.
+
+O fluxo implementado no nifi recupera a cada 1 minuto dados da temperatura atual nas capitais do Brasil.
+
+Os dados são coletados a partir do serviço http://servicos.cptec.inpe.br/XML/capitais/condicoesAtuais.xml.
+
+São consideradas as estações meteorológicas dos aeroportos das capitais.
+
+
+### Pré-requisitos básicos para execução
+- Linux Ubuntu
 - Docker
 - Docker-Compose
-- Linux Ubuntu
+- Git
+- Terminal por linha de comando
 - Navegador Internet (Chrome ou Firefox)
+- Acesso Internet
+
+Todas as ferramentas devem estar devidamente operacionais.
+
+### Acesso ao código fonte
+O código fonte está localizado no GitHub em https://github.com/Arleandro/bb-big-data-desafio.
+
+Para acessar o código é necessário executar o seguinte comando:
+```shell
+$ git clone https://github.com/Arleandro/bb-big-data-desafio.git
+```
+
+`Utilizar o diretório raíz da aplicação como workdir nas instruções de execução da solução.`
+
+### Inicialização do ecosistema
+1) Executar com docker-compose o arquivo docker-compose.yaml com o seguinte comando:
+```shell
+$ docker-compose up
+```
+
+### Parar execução do ecosistema
+```shell
+$ docker-compose down
+```
+
+### Endereços de acessos
+
+Nifi
+Grafana
+Prometheus
+cadvisor
 
 
-Para Executar:
+### 
 
 Adicionar permissão para o arquivo run.sh
 $ sudo chmod +x run.sh
@@ -16,10 +79,6 @@ $ sudo chmod +x run.sh
 Executar o arquivo
 $ ./run.sh
 ou
-$ docker-compose up
-
-Parar Execução
-$ docker-compose down
 
 
 Acessos às aplicações implementadas:
