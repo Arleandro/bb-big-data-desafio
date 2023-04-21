@@ -133,7 +133,7 @@ São consideradas as estações meteorológicas dos aeroportos das capitais.
 ### Elasticsearch - Informações
 
 #### Datasource Grafana
-Para o teste do datasouce do Elasticsearch funcionar no Grafana é necessário que exista o índice inpe-temperatura-capitais no grafana ***com registros já realizados pelo fluxo do Nifi***.
+Para o teste do datasouce do Elasticsearch funcionar no Grafana é necessário que exista o índice inpe-temperatura-capitais no grafana `com registros já realizados pelo fluxo do Nifi`.
 
 
 #### Criar índice
