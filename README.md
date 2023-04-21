@@ -73,92 +73,109 @@ $ docker-compose up
 $ docker-compose down
 ```
 
-### Endereços para acesso
 
-Nifi
-Grafana
-Prometheus
-cadvisor
+### Serviços Container
 
-
-### 
-
-Adicionar permissão para o arquivo run.sh
-$ sudo chmod +x run.sh
-
-Executar o arquivo
-$ ./run.sh
-ou
+| Container | Imagem Docker |
+| --------- | ------------- |
+| Elasticsearch | docker.elastic.co/elasticsearch/elasticsearch:7.14.0 |
+| [Apache Nifi](https://nifi.apache.org/) | apache/nifi:latest |
+| [Apache ZooKeeper](https://zookeeper.apache.org/) | confluentinc/cp-zookeeper:latest |
+| [Apache Kafka](https://kafka.apache.org/) | confluentinc/cp-kafka:latest |
+| [Container Advisor](https://github.com/google/cadvisor)  | gcr.io/cadvisor/cadvisor |
+| [Alertmanager](https://github.com/prometheus/alertmanager) | prom/alertmanager  |
+| [Node Exporter](https://github.com/prometheus/node_exporter) | quay.io/prometheus/node-exporter:latest |
+| [Prometheus](https://prometheus.io/) | prom/prometheus:v2.36.2 |
+| [Grafana](https://grafana.com/) | grafana/grafana |
 
 
-Acessos às aplicações implementadas:
+### Consoles Web Containers
 
-Grafana
-Acesso à aplicação
-http://localhost:3000
+| Container | URL | Usuário | Senha |
+| ----------- | ----------- | ---------- | ---------- |
+| [Apache Nifi](https://nifi.apache.org/) | https://localhost:8443 | admin | nifibigdatabb |
+| [Container Advisor](https://github.com/google/cadvisor) | http://localhost:8080 |  |  |
+| [Prometheus](https://prometheus.io/) | http://localhost:9090 | | |
+| [Grafana](https://grafana.com/) | http://localhost:3000 | admin | grafana  |
 
-Graficos de monitoramento
-http://localhost:3000/d/64nrElFmk/docker-prometheus-monitoring
-
-Para o teste do datasouce do Elasticsearch funcionar no Grafana é necessário que exista o índice inpe-temperatura-capitais no grafana com registros já realizados.
-
-O índice pode ser criado executando o seguinte comando: 
-$ curl --location --request PUT 'http://localhost:9200/inpe-temperatura-capitais'
-Response payload
-{
-    "acknowledged": true,
-    "shards_acknowledged": true,
-    "index": "inpe-temperatura-capitais"
-}
+### Outro acessos
+#### Grafana
+- [Graficos de monitoramento](http://localhost:3000/d/64nrElFmk/docker-prometheus-monitoring)
 
 
-Nifi
-https://localhost:8443/nifi
-Login
-Usuário: admin
-Senha: nifibigdatabb
+#### Prometheus
+- [Targets](http://localhost:9090/targets)
+- [Serviços monitorados](http://localhost:9090/graph?g0.expr=%0Aup&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h)
+- [Alertas gerados](http://localhost:9090/alerts)
 
-Projeto do fluxo disponível em: ./resources/nifi/inpe-monitor-temperatura-capitais.xml
+
+#### Container Advisor
+- [Metricas geradas](http://localhost:8080/metrics)
+
+### Apache Nifi - Fluxo
+Projeto do fluxo disponível no arquivo [inpe-monitor-temperatura-capitais.xml](/resources/nifi/inpe-monitor-temperatura-capitais.xml)
 
 O fluxo implementado no nifi recupera a cada 1 minuto dados da temperatura atual nas capitais do Brasil.
-Os dados são coletados a partir do serviço http://servicos.cptec.inpe.br/XML/capitais/condicoesAtuais.xml.
+
+Os dados meteorológicos são obtidos a partir do serviço [Previsão de Tempo em XML](http://servicos.cptec.inpe.br/XML/capitais/condicoesAtuais.xml) do [CPTEC/INPE](http://servicos.cptec.inpe.br/XML/).
+
 São consideradas as estações meteorológicas dos aeroportos das capitais.
 
-Para execução do fluxo é necessário:
+**Para execução do fluxo é necessário:**
 - Importar o projeto como template
 - Habilitar Record Reader e Record Write do ConvertRecord no Process Group DadosEntrada.
 - Habilitar Record Reader e Record Write do ConsumeKafkaRecord_1_0 no Process Group DadosSaida.
 - Iniciar a execução do fluxo
 
-Observação: não esquecer de parar a execução do processo após verificações.
+> Não esquecer de parar a execução do processo após verificações.
 
 
-Prometheus
+### Elasticsearch - Informações
 
-Acesso à aplicação
-http://localhost:9090/targets
-
-Serviços monitorados
-http://localhost:9090/graph?g0.expr=%0Aup&g0.tab=1&g0.stacked=0&g0.show_exemplars=0&g0.range_input=1h
-
-Alertas gerados
-http://localhost:9090/alerts
+#### Datasource Grafana
+Para o teste do datasouce do Elasticsearch funcionar no Grafana é necessário que exista o índice inpe-temperatura-capitais no grafana ***com registros já realizados pelo fluxo do Nifi***.
 
 
+#### Criar índice
 
-cadvisor
-Acesso à aplicação
-http://localhost:8080
+O índice pode ser criado executando o seguinte comando: 
+```shell
+$ curl --location --request PUT 'http://localhost:9200/inpe-temperatura-capitais'
+```
 
-Metricas geradas
-http://localhost:8080/metrics
+Response payload
+```json
+{
+    "acknowledged": true,
+    "shards_acknowledged": true,
+    "index": "inpe-temperatura-capitais"
+}
+```
+
+#### Excluir índice
+Nas verificações e/ou testes da solução poderá, eventualmente, ser necessário a exclusão dos dados no Elasticsearch. Isso pode ser realizado apagando o índice já existente.
+
+Para apagar o índice no elasticsearch, executar o seguinte comando:
+```shell
+$ curl --location --request DELETE 'http://localhost:9200/inpe-temperatura-capitais'
+```
+
+Response payload
+```json
+{
+    "acknowledged": true
+}
+```
 
 
-Elasticsearch
+#### Consultar registros do índice
 Para consultar os dados do índice utilizado no processamento, executar o seguinte comando:
+```shell
 $ curl --location 'http://localhost:9200/inpe-temperatura-capitais/_search?size=1000&pretty=true&q=*%3A*'
-HTTP Status Code: 200
+```
+
 Response payload (Estruta de dados equivalente)
+```json
 {
     "took": 2,
     "timed_out": false,
@@ -197,30 +214,4 @@ Response payload (Estruta de dados equivalente)
         ]
     }
 }
-
-![image](https://user-images.githubusercontent.com/28513394/233253913-f7ffe9ec-70bc-47ba-9dac-8bc1c0dd7b39.png)
-
-
-
-Para criar o índice no elasticsearch, executar o seguinte comando:
-$ curl --location --request PUT 'http://localhost:9200/inpe-temperatura-capitais'
-HTTP Status Code: 200
-Response payload
-{
-    "acknowledged": true,
-    "shards_acknowledged": true,
-    "index": "inpe-temperatura-capitais"
-}
-![image](https://user-images.githubusercontent.com/28513394/233253810-50efed17-0481-4b1f-98d4-1b443c06281e.png)
-
-
-
-Para apagar o índice no elasticsearch, executar o seguinte comando:
-$ curl --location --request DELETE 'http://localhost:9200/inpe-temperatura-capitais'
-HTTP Status Code: 200
-Response payload
-{
-    "acknowledged": true
-}
-![image](https://user-images.githubusercontent.com/28513394/233253964-c001f281-b894-4c04-822e-9dd5bc27d9b5.png)
-
+```
