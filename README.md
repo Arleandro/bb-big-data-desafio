@@ -32,15 +32,25 @@ São consideradas as estações meteorológicas dos aeroportos das capitais.
 
 
 ### Pré-requisitos básicos para execução
-- Linux Ubuntu
+- Linux based Debian Distro
 - Docker
 - Docker-Compose
 - Git
 - Terminal por linha de comando
+- IDE
 - Navegador Internet (Chrome ou Firefox)
 - Acesso Internet
 
 Todas as ferramentas devem estar devidamente operacionais.
+
+Vesões utilizadas no desenvolvimento:
+- Windows 10 Pro 22H2 19045.2604
+- WSL Ubuntu-20.04
+- Docker version 20.10.22, build 3a2c30b
+- docker-compose version 1.24.1, build 4667896b
+- git version 2.25.1
+- Visual Studio Code 1.77.3
+- Google Chrome 112.0.5615.137
 
 ### Acesso ao código fonte
 O código fonte está localizado no GitHub em https://github.com/Arleandro/bb-big-data-desafio.
@@ -50,7 +60,7 @@ Para acessar o código é necessário executar o seguinte comando:
 $ git clone https://github.com/Arleandro/bb-big-data-desafio.git
 ```
 
-`Utilizar o diretório raíz da aplicação como workdir nas instruções de execução da solução.`
+> Utilizar o diretório raíz da aplicação como workdir nas instruções de execução da solução.
 
 ### Inicialização do ecosistema
 1) Executar com docker-compose o arquivo docker-compose.yaml com o seguinte comando:
@@ -63,7 +73,7 @@ $ docker-compose up
 $ docker-compose down
 ```
 
-### Endereços de acessos
+### Endereços para acesso
 
 Nifi
 Grafana
