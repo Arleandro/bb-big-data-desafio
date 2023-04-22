@@ -53,7 +53,7 @@ datasources:
   - name: Elasticsearch
     type: elasticsearch
     access: proxy
-    database: 'inpe-temperatura-capitais'
+    database: 'inpe_temperatura_capitais'
     url: http://elasticsearch:9200
     jsonData:
       # interval: Daily

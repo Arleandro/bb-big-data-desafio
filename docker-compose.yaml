@@ -125,7 +125,7 @@ services:
   #     "
   #     # blocks until kafka is reachable
   #     echo -e 'Creating kafka topics if not exists'
-  #     kafka-topics --bootstrap-server kafka:29094 --create --if-not-exists --topic inpe-temperatura-capitais --replication-factor 1 --partitions 1
+  #     kafka-topics --bootstrap-server kafka:29094 --create --if-not-exists --topic inpe_temperatura_capitais --replication-factor 1 --partitions 1
       
   #     echo -e 'Successfully created the following topics:'
   #     kafka-topics --bootstrap-server kafka:29094 --list

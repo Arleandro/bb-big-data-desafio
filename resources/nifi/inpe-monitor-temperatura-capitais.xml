@@ -894,7 +894,7 @@
                             </entry>
                             <entry>
 <key>topic</key>
-<value>inpe-temperatura-capitais</value>
+<value>inpe_temperatura_capitais</value>
                             </entry>
                             <entry>
 <key>topic_type</key>
@@ -1309,7 +1309,7 @@
                             </entry>
                             <entry>
 <key>put-es-index</key>
-<value>inpe-temperatura-capitais</value>
+<value>inpe_temperatura_capitais</value>
                             </entry>
                             <entry>
 <key>put-es-type</key>
@@ -2512,7 +2512,7 @@
                             </entry>
                             <entry>
 <key>topic</key>
-<value>inpe-temperatura-capitais</value>
+<value>inpe_temperatura_capitais</value>
                             </entry>
                             <entry>
 <key>acks</key>

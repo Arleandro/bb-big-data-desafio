@@ -136,14 +136,14 @@ São consideradas as estações meteorológicas dos aeroportos das capitais.
 ### Elasticsearch - Informações
 
 #### Datasource Grafana
-Para o teste do datasouce do Elasticsearch funcionar no Grafana é necessário que exista o índice inpe-temperatura-capitais no grafana `com registros já realizados pelo fluxo do Nifi`.
+Para o teste do datasouce do Elasticsearch funcionar no Grafana é necessário que exista o índice inpe_temperatura_capitais no grafana `com registros já realizados pelo fluxo do Nifi`.
 
 
 #### Criar índice
 
 O índice pode ser criado executando o seguinte comando: 
 ```shell
-$ curl --location --request PUT 'http://localhost:9200/inpe-temperatura-capitais'
+$ curl --location --request PUT 'http://localhost:9200/inpe_temperatura_capitais'
 ```
 
 Response payload
@@ -151,7 +151,7 @@ Response payload
 {
     "acknowledged": true,
     "shards_acknowledged": true,
-    "index": "inpe-temperatura-capitais"
+    "index": "inpe_temperatura_capitais"
 }
 ```
 
@@ -160,7 +160,7 @@ Nas verificações e/ou testes da solução poderá, eventualmente, ser necessá
 
 Para apagar o índice no elasticsearch, executar o seguinte comando:
 ```shell
-$ curl --location --request DELETE 'http://localhost:9200/inpe-temperatura-capitais'
+$ curl --location --request DELETE 'http://localhost:9200/inpe_temperatura_capitais'
 ```
 
 Response payload
@@ -174,7 +174,7 @@ Response payload
 #### Consultar registros do índice
 Para consultar os dados do índice utilizado no processamento, executar o seguinte comando:
 ```shell
-$ curl --location 'http://localhost:9200/inpe-temperatura-capitais/_search?size=1000&pretty=true&q=*%3A*'
+$ curl --location 'http://localhost:9200/inpe_temperatura_capitais/_search?size=1000&pretty=true&q=*%3A*'
 ```
 
 Response payload (Estruta de dados equivalente)
@@ -196,7 +196,7 @@ Response payload (Estruta de dados equivalente)
         "max_score": 1.0,
         "hits": [
             {
-                "_index": "inpe-temperatura-capitais",
+                "_index": "inpe_temperatura_capitais",
                 "_type": "json",
                 "_id": "sHu5nIcBatnJ3VKRjdaf",
                 "_score": 1.0,
