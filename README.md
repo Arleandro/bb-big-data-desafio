@@ -38,6 +38,7 @@ São consideradas as estações meteorológicas dos aeroportos das capitais.
 - Git
 - Terminal por linha de comando
 - IDE
+- curl
 - Navegador Internet (Chrome ou Firefox)
 - Acesso Internet
 
@@ -57,6 +58,7 @@ O código fonte está localizado no GitHub em https://github.com/Arleandro/bb-bi
 
 Para acessar o código é necessário executar o seguinte comando:
 ```shell
+$ git config --global http.sslVerify false
 $ git clone https://github.com/Arleandro/bb-big-data-desafio.git
 ```
 
@@ -78,7 +80,7 @@ $ docker-compose down
 
 | Container | Imagem Docker |
 | --------- | ------------- |
-| Elasticsearch | docker.elastic.co/elasticsearch/elasticsearch:7.14.0 |
+| [Elasticsearch](https://github.com/elastic/elasticsearch) | docker.elastic.co/elasticsearch/elasticsearch:7.14.0 |
 | [Apache Nifi](https://nifi.apache.org/) | apache/nifi:latest |
 | [Apache ZooKeeper](https://zookeeper.apache.org/) | confluentinc/cp-zookeeper:latest |
 | [Apache Kafka](https://kafka.apache.org/) | confluentinc/cp-kafka:latest |
