@@ -39,6 +39,7 @@ São consideradas as estações meteorológicas dos aeroportos das capitais.
 - Terminal por linha de comando
 - IDE
 - curl
+- Offset Explorer (Kafka Tool)
 - Navegador Internet (Chrome ou Firefox)
 - Acesso Internet
 
